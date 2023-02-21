@@ -1,0 +1,36 @@
+version: '3'
+
+networks:
+  app_network:
+    driver: overlay
+
+services:
+  app:
+    build: .
+    command: uvicorn config.asgi:application --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    networks:
+      - app_network
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    networks:
+      - app_network
+
+  celery:
+    build: .
+    command: celery -A config worker --loglevel=info -Q test_async --concurrency=1
+    networks:
+      - app_network
+    depends_on:
+      - app 
+      - redis
