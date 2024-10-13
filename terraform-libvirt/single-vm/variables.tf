@@ -8,7 +8,22 @@ variable "base_ip" {
   type = string
 }
 
-variable "volume_size" {
+variable "vcpu" {
+  description = ""
+  type = number
+}
+
+variable "ram" {
+  description = ""
+  type = string
+}
+
+variable "volume" {
+  description = ""
+  type = string
+}
+
+variable "password" {
   description = ""
   type = string
 }
@@ -23,12 +38,8 @@ variable "pubkey" {
   type = string
 }
 
-variable "base_image_path" {
+variable "base_image" {
   description = ""
   type = string
 }
 
-variable "password" {
-  description = ""
-  type = string
-}

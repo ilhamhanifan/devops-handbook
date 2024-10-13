@@ -1,13 +1,14 @@
 resource "null_resource" "check_user_group" {
   provisioner "local-exec" {
-    command = "ls ~/libvirt/base_images"
+    command = "ls ~"
   }
 }
 
 resource "libvirt_volume" "ubuntu_noble" {
   name   = "ubuntu_noble"
   pool = "images"
-  source = var.base_image_path
+  source = var.base_image
+  format ="qcow2"
 }
 
 resource "libvirt_network" "vm_net" {
@@ -45,15 +46,15 @@ resource "libvirt_cloudinit_disk" "cloudinit" {
 
 resource "libvirt_volume" "vm_disk" {
   name           = "vm-disk"
-  size           = var.volume_size
+  size           = var.volume
   pool           = "volumes"
   base_volume_id = libvirt_volume.ubuntu_noble.id
 }
 
 resource "libvirt_domain" "vm" {
   name     = "vm"
-  memory   = "4096"
-  vcpu     = 2
+  memory   = var.ram
+  vcpu     = var.vcpu
 
   network_interface {
     network_id = libvirt_network.vm_net.id

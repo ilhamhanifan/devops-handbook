@@ -16,7 +16,8 @@ virsh pool-autostart $VOLUME_POOL_NAME
 virsh pool-start $VOLUME_POOL_NAME
 
 # setup images folder
-IMAGES_PATH=~/libvirt/base_images
+IMAGES_PATH=~/libvirt/base_images/
 IMAGE_URL=https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img
+#IMAGE_URL=https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img
 mkdir -p $IMAGES_PATH
 wget -P $IMAGES_PATH $IMAGE_URL
