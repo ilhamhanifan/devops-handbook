@@ -1,26 +1,36 @@
-variable "base_image" {
-  description = ""
-  type = string
-}
-
 variable "base_ip" {
   description = ""
   type = string
 }
 
-variable "hostname" {
+variable "master_ram" {
   description = ""
   type = string
 }
 
-variable "vcpu" {
+variable "master_vcpu" {
   description = ""
   type = number
 }
 
-variable "ram" {
+variable "worker_ram" {
   description = ""
   type = string
+}
+
+variable "worker_vcpu" {
+  description = ""
+  type = string
+}
+
+variable "lb_ram" {
+  description = ""
+  type = string
+}
+
+variable "lb_vcpu" {
+  description = ""
+  type = number
 }
 
 variable "volume" {
@@ -39,6 +49,11 @@ variable "cloudinit" {
 }
 
 variable "pubkey" {
+  description = ""
+  type = string
+}
+
+variable "base_image" {
   description = ""
   type = string
 }
